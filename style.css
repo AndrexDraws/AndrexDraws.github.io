@@ -1,0 +1,546 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+}
+
+/* =========================
+   CIELO NOCTURNO Y ESTRELLAS
+========================= */
+.cielo {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        #090a1e 0%,
+        #121838 40%,
+        #1b2752 70%,
+        #152038 100%
+    );
+    z-index: -10;
+}
+
+.estrellas {
+    position: fixed;
+    inset: 0;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #ffeeaa, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 230px 190px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 310px 80px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 370px 150px, #ffeeaa, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 450px 50px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 520px 220px, #ffffff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 550px 300px;
+    opacity: 0.8;
+    animation: brilloEstrellas 3s ease-in-out infinite alternate;
+    z-index: -9;
+}
+
+@keyframes brilloEstrellas {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
+
+.luna {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: 12%;
+    top: 8%;
+    border-radius: 50%;
+    background: #fffdf0;
+    box-shadow: 0 0 25px #ffffff, 0 0 60px rgba(255, 253, 220, 0.6);
+    animation: lunaBrillo 4s ease-in-out infinite alternate;
+}
+
+@keyframes lunaBrillo {
+    from { transform: scale(1); box-shadow: 0 0 25px #ffffff, 0 0 60px rgba(255, 253, 220, 0.6); }
+    to { transform: scale(1.05); box-shadow: 0 0 35px #ffffff, 0 0 85px rgba(255, 253, 220, 0.8); }
+}
+
+/* =========================
+   NOMBRE DE FONDO (DANIELA)
+========================= */
+.nombre-fondo {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(80px, 16vw, 200px);
+    font-weight: 700;
+    color: rgba(180, 140, 0, 0.35);
+    text-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+    letter-spacing: 4px;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* =========================
+   NUBES NOCTURNAS
+========================= */
+.nube {
+    position: absolute;
+    width: 150px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    animation: nube 45s linear infinite;
+    z-index: 1;
+}
+
+.nube::before {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    left: 25px;
+    bottom: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+}
+
+.nube::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    right: 20px;
+    bottom: 5px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+}
+
+.nube1 { top: 10%; left: -180px; }
+.nube2 { top: 28%; left: -300px; transform: scale(0.65); animation-delay: 12s; }
+.nube3 { top: 18%; left: -400px; transform: scale(0.5); animation-delay: 24s; }
+
+@keyframes nube {
+    from { margin-left: -200px; }
+    to { margin-left: 130vw; }
+}
+
+/* =========================
+   MENSAJE PRINCIPAL
+========================= */
+.mensaje {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+    z-index: 30;
+    animation: aparecer 1.5s ease;
+}
+
+.corazon {
+    font-size: 38px;
+    animation: latido 1.5s infinite;
+}
+
+.mensaje h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(60px, 8vw, 90px);
+    color: #ffe875;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.mensaje p {
+    max-width: 700px;
+    margin: 0 auto 20px;
+    color: #e0e6ff;
+    font-size: 17px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+}
+
+#botonCarta {
+    border: none;
+    padding: 15px 30px;
+    border-radius: 40px;
+    background: #ffe575;
+    color: #4a3300;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 7px 20px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+#botonCarta:hover {
+    transform: translateY(-4px);
+    background: #ffffff;
+}
+
+/* =========================
+   CAMPO Y TIERRA
+========================= */
+.campo {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 55%;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.tierra {
+    position: absolute;
+    left: -5%;
+    bottom: -15px;
+    width: 110%;
+    height: 28%;
+    background: linear-gradient(to bottom, #1f3b14, #0d1a08);
+    border-radius: 50% 50% 0 0 / 15% 15% 0 0;
+}
+
+/* =========================
+   ESTRUCTURA FLOR
+========================= */
+.flor {
+    position: absolute;
+    bottom: 5%;
+    width: 140px;
+    height: 260px;
+    transform-origin: bottom center;
+}
+
+.flor1 { left: 0%; transform: scale(0.70); animation: viento1 4s ease-in-out infinite alternate; }
+.flor2 { left: 17%; transform: scale(0.82); animation: viento2 4.5s ease-in-out infinite alternate; }
+.flor3 { left: 34%; transform: scale(0.65); animation: viento1 5s ease-in-out infinite alternate; }
+.flor4 { left: 51%; transform: scale(0.85); animation: viento2 4.2s ease-in-out infinite alternate; }
+.flor5 { left: 69%; transform: scale(0.72); animation: viento1 4.8s ease-in-out infinite alternate; }
+.flor6 { left: 87%; transform: scale(0.62); animation: viento2 5s ease-in-out infinite alternate; }
+
+.tallo {
+    position: absolute;
+    width: 11px;
+    height: 210px;
+    left: 64px;
+    bottom: 0;
+    background: linear-gradient(to right, #1d4015, #355e27);
+    border-radius: 10px;
+}
+
+.hoja {
+    position: absolute;
+    width: 65px;
+    height: 30px;
+    background: #2a521e;
+    border-radius: 100% 0 100% 0;
+}
+
+.hoja1 { left: 10px; bottom: 75px; transform: rotate(-25deg); }
+.hoja2 { left: 62px; bottom: 115px; transform: scaleX(-1) rotate(-25deg); }
+
+.girasol {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    left: -10px;
+    top: -20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.petalos-capa {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.petalos-frente { transform: rotate(11.25deg); }
+
+.petalo {
+    position: absolute;
+    bottom: 50%;
+    transform-origin: bottom center;
+    border-radius: 50% 50% 40% 40% / 70% 70% 30% 30%;
+}
+
+.petalos-atras .petalo {
+    width: 26px;
+    height: 72px;
+    background: linear-gradient(to top, #c45b00 0%, #e69500 50%, #ffc218 100%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.petalos-frente .petalo {
+    width: 24px;
+    height: 64px;
+    background: linear-gradient(to top, #d46f00 0%, #f0a800 60%, #ffcc33 100%);
+}
+
+.p1  { transform: rotate(0deg); }   .p2  { transform: rotate(22.5deg); }
+.p3  { transform: rotate(45deg); }  .p4  { transform: rotate(67.5deg); }
+.p5  { transform: rotate(90deg); }  .p6  { transform: rotate(112.5deg); }
+.p7  { transform: rotate(135deg); } .p8  { transform: rotate(157.5deg); }
+.p9  { transform: rotate(180deg); } .p10 { transform: rotate(202.5deg); }
+.p11 { transform: rotate(225deg); } .p12 { transform: rotate(247.5deg); }
+.p13 { transform: rotate(270deg); } .p14 { transform: rotate(292.5deg); }
+.p15 { transform: rotate(315deg); } .p16 { transform: rotate(337.5deg); }
+
+.centro {
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1f0e04 0%, #331808 70%, #120702 100%);
+    border: 3px solid #100500;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 5;
+}
+
+@keyframes viento1 { from { rotate: -2deg; } to { rotate: 2deg; } }
+@keyframes viento2 { from { rotate: 2deg; } to { rotate: -2deg; } }
+
+.flores-flotando span {
+    position: absolute;
+    top: -40px;
+    font-size: 20px;
+    z-index: 20;
+    animation: caer 10s linear infinite;
+}
+
+.flores-flotando span:nth-child(1) { left: 10%; animation-delay: 0s; }
+.flores-flotando span:nth-child(2) { left: 30%; animation-delay: 2s; }
+.flores-flotando span:nth-child(3) { left: 45%; animation-delay: 4s; }
+.flores-flotando span:nth-child(4) { left: 60%; animation-delay: 1s; }
+.flores-flotando span:nth-child(5) { left: 78%; animation-delay: 5s; }
+.flores-flotando span:nth-child(6) { left: 90%; animation-delay: 7s; }
+
+@keyframes caer {
+    0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: translateY(100vh) translateX(100px) rotate(360deg); opacity: 0; }
+}
+
+/* =========================
+   MODAL CARTA Y POLAROID
+========================= */
+.carta-fondo {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.75);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s;
+    z-index: 100;
+}
+
+.carta-fondo.mostrar {
+    opacity: 1;
+    visibility: visible;
+}
+
+.carta {
+    position: relative;
+    width: min(92%, 680px);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 25px 25px;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.6);
+    transform: scale(0.6);
+    transition: 0.4s;
+}
+
+.carta-fondo.mostrar .carta {
+    transform: scale(1);
+}
+
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    background: transparent;
+    font-size: 32px;
+    color: #8a6915;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carta-contenido {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+}
+
+.columna-izquierda {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+}
+
+.columna-derecha {
+    flex: 1.2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* MARCO POLAROID DE LA FOTO */
+.marco-polaroid {
+    background: #fdfaf2;
+    padding: 12px 12px 20px 12px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #eae5d8;
+    text-align: center;
+    transform: rotate(-3deg);
+}
+
+.imagen-contenedor {
+    width: 100%;
+    max-width: 240px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.foto-mensaje {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.polaroid-texto {
+    margin-top: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #7d7256;
+    font-weight: 500;
+}
+
+.mini-flor { 
+    font-size: 28px; 
+    margin-bottom: 2px; 
+}
+
+.carta h2 { 
+    font-family: "Dancing Script", cursive; 
+    font-size: 38px; 
+    color: #111; 
+    margin-bottom: 8px; 
+}
+
+.carta p { 
+    color: #444; 
+    line-height: 1.5; 
+    margin-bottom: 16px; 
+    font-size: 14px; 
+}
+
+/* REPRODUCTOR DENTRO DEL CUADRO */
+.reproductor-interno {
+    background: rgba(240, 240, 240, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px 14px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-cancion-int {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+}
+
+.controles-int {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-play-pause {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-play-pause:hover {
+    transform: scale(1.08);
+}
+
+.progreso-int {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    font-size: 11px;
+    color: #555;
+    font-weight: 500;
+}
+
+#barraProgreso {
+    flex: 1;
+    accent-color: #f0a800;
+    cursor: pointer;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translate(-50%, -30px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@media (max-width: 600px) {
+    .luna { width: 75px; height: 75px; right: 8%; top: 7%; }
+    .mensaje { top: 12%; }
+    .mensaje h1 { font-size: 52px; }
+    .mensaje p { font-size: 13px; padding: 0 10px; }
+    #botonCarta { padding: 12px 22px; font-size: 14px; }
+    .campo { height: 52%; }
+    
+    .carta-contenido {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .imagen-contenedor {
+        max-width: 200px;
+    }
+}
